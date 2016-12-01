@@ -16,7 +16,7 @@ Note: You'll find your tracking id and API on the settings page on app.openinbou
     $oi->updateContact($_COOKIE['_oi_contact_id'], $data);
 </pre>
 
-Note: The $$_COOKIE['_oi_contact_id'] will be automatically set by the OpenInbound tracking script.
+Note: The $_COOKIE['_oi_contact_id'] will be automatically set by the OpenInbound tracking script.
 
 ## Contact ##
 If you need further assistance, please contact lf@netnode.ch

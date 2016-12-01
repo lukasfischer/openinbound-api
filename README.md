@@ -3,6 +3,8 @@
 ## Usage ##
 <pre>$oi = new OI('YOUR_TRACKING_ID', 'YOUR_API_KEY');</pre>
 
+Note: You'll find your tracking id and API on the settings page on app.openinbound.com.
+
 ## Examples ##
 ## Update an existing contact ##
 <pre>

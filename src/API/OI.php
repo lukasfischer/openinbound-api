@@ -1,5 +1,7 @@
 <?php
 
+namespace OpenInbound\Api;
+
 define('OI_BACKEND_URL', 'https://dims-api.netnode.ch');
 
 

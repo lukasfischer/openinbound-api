@@ -1,0 +1,21 @@
+{
+    "name": "openinbound/openinbound-api",
+    "description": "API for the OpenInbound analytics server",
+    "type": "library",
+    "require": {
+        "php": ">=5.4"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Lukas Fischer",
+            "email": "lf@netnode.ch"
+        }
+    ],
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "OpenInbound\\": "src/"
+        }
+    }
+}

@@ -7,7 +7,7 @@ Note: You'll find your tracking id and API on the settings page on app.openinbou
 
 ## Examples ##
 ## Update an existing contact ##
-<code>
+<pre>
     $data['email'] = 'email'
     $data['first_name'] = 'Joe';
     $data['last_name'] = 'Long';
@@ -15,16 +15,16 @@ Note: You'll find your tracking id and API on the settings page on app.openinbou
     $data['phone'] = '041 450 10 66';
     $oi = new OI('YOUR_TRACKING_ID', 'YOUR_API_KEY');
     $oi->updateContact($_COOKIE['_oi_contact_id'], $data);
-</code>
+</pre>
 
 ## Log a custom event to the OpenInbound backend ##
-<code>
+<pre>
     $data['title'] = 'This title will be sent in the OpenInbound event list';
     $data['event_type'] = 'raw';
     $data['raw'] = 'Whatever data you want to send.';
     $oi = new OI('YOUR_TRACKING_ID', 'YOUR_API_KEY');
     $oi->addEvent($_COOKIE['_oi_contact_id'], $data);
-</code>
+</pre>
 
 
 Note: The $_COOKIE['_oi_contact_id'] will be automatically set by the OpenInbound tracking script.

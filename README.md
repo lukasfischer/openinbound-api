@@ -22,11 +22,11 @@ Note: The $_COOKIE['_oi_contact_id'] will be automatically set by the OpenInboun
 ## Contact ##
 If you need further assistance, please contact lf@netnode.ch
 
-### API Reference ###
+# API Reference ###
 
 ## Contact Entity ##
 
-# Properties #
+### Properties ###
 <table>
 <tr>
 <td>email</td>

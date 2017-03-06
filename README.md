@@ -22,7 +22,34 @@ Note: The $_COOKIE['_oi_contact_id'] will be automatically set by the OpenInboun
 ## Contact ##
 If you need further assistance, please contact lf@netnode.ch
 
-## API Reference ##
+### API Reference ###
+
+## Contact Entity ##
+
+# Properties #
+<table>
+<tr>
+<td>email</td>
+<td>Contacts email address</td>
+</tr>
+<tr>
+<td>first_name</td>
+<td>First name of contact</td>
+</tr>
+<tr>
+<td>last_name</td>
+<td>Last name of contact</td>
+</tr>
+<tr>
+<td>company_name</td>
+<td>Company name of contact</td>
+</tr>
+<tr>
+<td>phone</td>
+<td>Phone number of contact</td>
+</tr>
+</table>
+
 
 <table>
 <tr>

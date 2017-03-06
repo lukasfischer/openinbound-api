@@ -1,7 +1,5 @@
 <?php
 
-namespace OpenInbound\Api;
-
 define('OI_BACKEND_URL', 'https://dims-api.netnode.ch');
 
 
@@ -18,9 +16,7 @@ class OI {
 
     public function getStats() {
         $url = OI_BACKEND_URL.'/api/v1/stats?tracking_id='.$this->tracking_id.'&api_key='.$this->api_key;
-        $this->debug_raw($url);
         $array = json_decode(file_get_contents($url));
-        $this->debug_raw($array);
         return (array)$array->data;
     }
 
@@ -39,7 +35,6 @@ class OI {
             $get_params .= '&'.$key.'='.$value;
         }
         $url = OI_BACKEND_URL.'/api/v1/contact?tracking_id='.$this->tracking_id.'&api_key='.$this->api_key.'&limit=100&'.$get_params;
-        $this->debug_raw($url);
         $array = json_decode(file_get_contents($url));
         return $array;
     }
@@ -72,10 +67,6 @@ class OI {
         $status_code = @curl_getinfo($ch, CURLINFO_HTTP_CODE);
         $curl_errors = curl_error($ch);
         @curl_close($ch);
-
-        //$this->debug_raw($curl_errors);
-        //$this->debug_raw($status_code);
-        //$this->debug_raw($response);
     }
 
     /**
@@ -95,10 +86,6 @@ class OI {
         $status_code = @curl_getinfo($ch, CURLINFO_HTTP_CODE);
         $curl_errors = curl_error($ch);
         @curl_close($ch);
-
-        //$this->debug_raw($curl_errors);
-        //$this->debug_raw($status_code);
-        //$this->debug_raw($response);
     }
 
     /**
@@ -116,7 +103,6 @@ class OI {
             $get_params .= '&'.$key.'='.$value;
         }
         $url = OI_BACKEND_URL.'/api/v1/contact_note?tracking_id='.$this->tracking_id.'&api_key='.$this->api_key.'&limit=100&'.$get_params;
-        $this->debug_raw($url);
         $array = json_decode(file_get_contents($url));
         return $array;
     }
@@ -149,10 +135,6 @@ class OI {
         $status_code = @curl_getinfo($ch, CURLINFO_HTTP_CODE);
         $curl_errors = curl_error($ch);
         @curl_close($ch);
-
-        //$this->debug_raw($curl_errors);
-        //$this->debug_raw($status_code);
-        //$this->debug_raw($response);
     }
 
     /**
@@ -172,10 +154,6 @@ class OI {
         $status_code = @curl_getinfo($ch, CURLINFO_HTTP_CODE);
         $curl_errors = curl_error($ch);
         @curl_close($ch);
-
-        //$this->debug_raw($curl_errors);
-        //$this->debug_raw($status_code);
-        //$this->debug_raw($response);
     }
 
 
@@ -189,24 +167,43 @@ class OI {
             $get_params .= '&'.$key.'='.$value;
         }
         $url = OI_BACKEND_URL.'/api/v1/event?tracking_id='.$this->tracking_id.'&api_key='.$this->api_key.'&limit=100&'.$get_params;
-        $this->debug_raw($url);
         $array = json_decode(file_get_contents($url));
         return $array;
     }
+
+    /**
+     * Add a new event note to the backend
+     * @param $params
+     */
+    public function addEvent($id, $properties) {
+        $properties['contact_id'] = $id;
+        $properties['tracking_id'] = $this->tracking_id;
+        $properties['api_key'] = $this->tracking_id;
+        $post_json = json_encode($properties);
+        $endpoint = OI_BACKEND_URL.'/api/v1/event?tracking_id='.$this->tracking_id.'&api_key='.$this->api_key;
+        $ch = @curl_init();
+        @curl_setopt($ch, CURLOPT_POST, true);
+        @curl_setopt($ch, CURLOPT_POSTFIELDS, $post_json);
+        @curl_setopt($ch, CURLOPT_URL, $endpoint);
+        @curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+        @curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $response = @curl_exec($ch);
+        $status_code = @curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        $curl_errors = curl_error($ch);
+        @curl_close($ch);
+    }
+
 
 
     /**
      * MAILINGS API
      */
-
-
     public function queryMailings($params) {
         $get_params = '';
         foreach ($params as $key=>$value) {
             $get_params .= '&'.$key.'='.$value;
         }
         $url = OI_BACKEND_URL.'/api/v1/mailing?tracking_id='.$this->tracking_id.'&api_key='.$this->api_key.'&limit=100&'.$get_params;
-        $this->debug_raw($url);
         $array = json_decode(file_get_contents($url));
         return $array;
     }
@@ -231,9 +228,6 @@ class OI {
         $status_code = @curl_getinfo($ch, CURLINFO_HTTP_CODE);
         $curl_errors = curl_error($ch);
         @curl_close($ch);
-        $this->debug_raw($curl_errors);
-        $this->debug_raw($status_code);
-        $this->debug_raw($response);
     }
 
     public function updateMailing($id, $properties) {
@@ -251,7 +245,4 @@ class OI {
         @curl_close($ch);
     }
 
-    function debug_raw($data) {
-        drupal_set_message('<pre>'.print_r($data,1).'</pre>');
-    }
 }

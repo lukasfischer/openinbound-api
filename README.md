@@ -34,6 +34,8 @@ Note: The $_COOKIE['_oi_contact_id'] will be automatically set by the OpenInboun
 ## Get in touch ##
 If you need further assistance, please contact lf@netnode.ch
 
+
+<hr>
 # API Reference ###
 
 ## Contact Entity ##

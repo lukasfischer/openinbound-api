@@ -1,12 +1,12 @@
 <?php
 
-define('OI_BACKEND_URL', 'https://dims-api.netnode.ch');
-
+namespace OpenInbound;
 
 class OI {
 
-    var $api_key = '';
-    var $tracking_id = '';
+    protected $api_key = '';
+    protected $tracking_id = '';
+    private $oi_backend_url = 'https://api.openinbound.com';
 
     public final function __construct($tracking_id, $api_key)
     {
@@ -15,7 +15,7 @@ class OI {
     }
 
     public function getStats() {
-        $url = OI_BACKEND_URL.'/api/v1/stats?tracking_id='.$this->tracking_id.'&api_key='.$this->api_key;
+        $url = $this->oi_backend_url.'/api/v1/stats?tracking_id='.$this->tracking_id.'&api_key='.$this->api_key;
         $array = json_decode(file_get_contents($url));
         return (array)$array->data;
     }
@@ -34,7 +34,7 @@ class OI {
         foreach ($params as $key=>$value) {
             $get_params .= '&'.$key.'='.$value;
         }
-        $url = OI_BACKEND_URL.'/api/v1/contact?tracking_id='.$this->tracking_id.'&api_key='.$this->api_key.'&limit=100&'.$get_params;
+        $url = $this->oi_backend_url.'/api/v1/contact?tracking_id='.$this->tracking_id.'&api_key='.$this->api_key.'&limit=100&'.$get_params;
         $array = json_decode(file_get_contents($url));
         return $array;
     }
@@ -56,7 +56,7 @@ class OI {
     public function addContact($params) {
         $params['tracking_id'] = $this->tracking_id;
         $post_json = json_encode($params);
-        $endpoint = OI_BACKEND_URL.'/api/v1/contact?tracking_id='.$this->tracking_id.'&api_key='.$this->api_key;
+        $endpoint = $this->oi_backend_url.'/api/v1/contact?tracking_id='.$this->tracking_id.'&api_key='.$this->api_key;
         $ch = @curl_init();
         @curl_setopt($ch, CURLOPT_POST, true);
         @curl_setopt($ch, CURLOPT_POSTFIELDS, $post_json);
@@ -75,7 +75,7 @@ class OI {
      */
     public function updateContact($id, $properties) {
         $post_json = json_encode($properties);
-        $endpoint = OI_BACKEND_URL.'/api/v1/contact/'.$id.'?tracking_id='.$this->tracking_id.'&api_key='.$this->api_key;
+        $endpoint = $this->oi_backend_url.'/api/v1/contact/'.$id.'?tracking_id='.$this->tracking_id.'&api_key='.$this->api_key;
         $ch = @curl_init();
         @curl_setopt($ch, CURLOPT_POST, true);
         @curl_setopt($ch, CURLOPT_POSTFIELDS, $post_json);
@@ -102,7 +102,7 @@ class OI {
         foreach ($params as $key=>$value) {
             $get_params .= '&'.$key.'='.$value;
         }
-        $url = OI_BACKEND_URL.'/api/v1/contact_note?tracking_id='.$this->tracking_id.'&api_key='.$this->api_key.'&limit=100&'.$get_params;
+        $url = $this->oi_backend_url.'/api/v1/contact_note?tracking_id='.$this->tracking_id.'&api_key='.$this->api_key.'&limit=100&'.$get_params;
         $array = json_decode(file_get_contents($url));
         return $array;
     }
@@ -124,7 +124,7 @@ class OI {
     public function addContactNote($params) {
         $params['tracking_id'] = $this->tracking_id;
         $post_json = json_encode($params);
-        $endpoint = OI_BACKEND_URL.'/api/v1/contact_note?tracking_id='.$this->tracking_id.'&api_key='.$this->api_key;
+        $endpoint = $this->oi_backend_url.'/api/v1/contact_note?tracking_id='.$this->tracking_id.'&api_key='.$this->api_key;
         $ch = @curl_init();
         @curl_setopt($ch, CURLOPT_POST, true);
         @curl_setopt($ch, CURLOPT_POSTFIELDS, $post_json);
@@ -143,7 +143,7 @@ class OI {
      */
     public function updateContactNote($id, $properties) {
         $post_json = json_encode($properties);
-        $endpoint = OI_BACKEND_URL.'/api/v1/contact_note/'.$id.'?tracking_id='.$this->tracking_id.'&api_key='.$this->api_key;
+        $endpoint = $this->oi_backend_url.'/api/v1/contact_note/'.$id.'?tracking_id='.$this->tracking_id.'&api_key='.$this->api_key;
         $ch = @curl_init();
         @curl_setopt($ch, CURLOPT_POST, true);
         @curl_setopt($ch, CURLOPT_POSTFIELDS, $post_json);
@@ -166,7 +166,7 @@ class OI {
         foreach ($params as $key=>$value) {
             $get_params .= '&'.$key.'='.$value;
         }
-        $url = OI_BACKEND_URL.'/api/v1/event?tracking_id='.$this->tracking_id.'&api_key='.$this->api_key.'&limit=100&'.$get_params;
+        $url = $this->oi_backend_url.'/api/v1/event?tracking_id='.$this->tracking_id.'&api_key='.$this->api_key.'&limit=100&'.$get_params;
         $array = json_decode(file_get_contents($url));
         return $array;
     }
@@ -180,7 +180,7 @@ class OI {
         $properties['tracking_id'] = $this->tracking_id;
         $properties['api_key'] = $this->tracking_id;
         $post_json = json_encode($properties);
-        $endpoint = OI_BACKEND_URL.'/api/v1/event?tracking_id='.$this->tracking_id.'&api_key='.$this->api_key;
+        $endpoint = $this->oi_backend_url.'/api/v1/event?tracking_id='.$this->tracking_id.'&api_key='.$this->api_key;
         $ch = @curl_init();
         @curl_setopt($ch, CURLOPT_POST, true);
         @curl_setopt($ch, CURLOPT_POSTFIELDS, $post_json);
@@ -203,21 +203,21 @@ class OI {
         foreach ($params as $key=>$value) {
             $get_params .= '&'.$key.'='.$value;
         }
-        $url = OI_BACKEND_URL.'/api/v1/mailing?tracking_id='.$this->tracking_id.'&api_key='.$this->api_key.'&limit=100&'.$get_params;
+        $url = $this->oi_backend_url.'/api/v1/mailing?tracking_id='.$this->tracking_id.'&api_key='.$this->api_key.'&limit=100&'.$get_params;
         $array = json_decode(file_get_contents($url));
         return $array;
     }
 
 
     public function getMailing($id) {
-        $array = json_decode(file_get_contents(OI_BACKEND_URL.'/api/v1/mailing/'.$id.'?tracking_id='.$this->tracking_id.'&api_key='.$this->api_key.'&limit=10'));
+        $array = json_decode(file_get_contents($this->oi_backend_url.'/api/v1/mailing/'.$id.'?tracking_id='.$this->tracking_id.'&api_key='.$this->api_key.'&limit=10'));
         return $array;
     }
 
     public function addMailing($params) {
         $params['tracking_id'] = $this->tracking_id;
         $post_json = json_encode($params);
-        $endpoint = OI_BACKEND_URL.'/api/v1/mailing?tracking_id='.$this->tracking_id.'&api_key='.$this->api_key;
+        $endpoint = $this->oi_backend_url.'/api/v1/mailing?tracking_id='.$this->tracking_id.'&api_key='.$this->api_key;
         $ch = @curl_init();
         @curl_setopt($ch, CURLOPT_POST, true);
         @curl_setopt($ch, CURLOPT_POSTFIELDS, $post_json);
@@ -232,7 +232,7 @@ class OI {
 
     public function updateMailing($id, $properties) {
         $post_json = json_encode($properties);
-        $endpoint = OI_BACKEND_URL.'/api/v1/mailing/'.$id.'?tracking_id='.$this->tracking_id.'&api_key='.$this->api_key;
+        $endpoint = $this->oi_backend_url.'/api/v1/mailing/'.$id.'?tracking_id='.$this->tracking_id.'&api_key='.$this->api_key;
         $ch = @curl_init();
         @curl_setopt($ch, CURLOPT_POST, true);
         @curl_setopt($ch, CURLOPT_POSTFIELDS, $post_json);

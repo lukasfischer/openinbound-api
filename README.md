@@ -64,22 +64,6 @@ If you need further assistance, please contact lf@netnode.ch
 </tr>
 </table>
 
-
-<table>
-<tr>
-<th colspan="3">Contact API Call</th>
-<tr>
-<td>GET</td>
-<td>/api/v1/contact</td>
-<td>Query contacts</td>
-</tr>
-<tr>
-<td>GET</td>
-<td>/api/v1/contact/{{id}}</td>
-<td>Get single contact</td>
-</tr>
-</table>
-
 ## Event Entity ##
 
 ### Properties ###
@@ -101,21 +85,4 @@ If you need further assistance, please contact lf@netnode.ch
 <td>Any data you want to save.</td>
 </tr>
 </table>
-
-
-<table>
-<tr>
-<th colspan="3">Contact API Call</th>
-<tr>
-<td>GET</td>
-<td>/api/v1/contact</td>
-<td>Query contacts</td>
-</tr>
-<tr>
-<td>POST</td>
-<td>/api/v1/event</td>
-<td>Create a new event. The contact_id always need to be set.</td>
-</tr>
-</table>
-
 
